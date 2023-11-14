@@ -1,3 +1,3 @@
-const x = require('./test')
+const { numbers, names } = require('./test')
 
-console.log(x)
+console.log(numbers, names)
