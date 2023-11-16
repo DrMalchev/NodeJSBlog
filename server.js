@@ -1,8 +1,11 @@
 const http = require('http');
 const fs = require('fs');
+const _ = require('lodash');
 
 const server = http.createServer((req, res) => {
-    console.log('req made')
+    // lodash
+    const num = _.random(0, 20);
+    console.log(num)
 
     res.setHeader('Content-Type', 'text/html')
     let path = './views';
@@ -15,7 +18,7 @@ const server = http.createServer((req, res) => {
         case '/about':
             writeToResponse(res, path + '/about.html', '200')
             break;
-        case '/about-me':
+        case '/about-us':
             res.statusCode = '301';
             res.setHeader('Location', '/about');
             res.end();
