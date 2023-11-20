@@ -6,6 +6,13 @@ const app = express();
 app.set('view engine', 'ejs')
 
 app.listen(3000);
+
+// create a middleware to log to the console
+app.use((req,resp) =>{
+    console.log(req.url)
+});
+
+
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
