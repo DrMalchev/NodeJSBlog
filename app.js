@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan')
 
 const app = express();
 
@@ -7,13 +8,10 @@ app.set('view engine', 'ejs')
 
 app.listen(3000);
 
-// create a middleware to log to the console
-app.use((req,resp) =>{
-    console.log(req.url)
-});
+app.use(morgan('dev'))
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     //res.send('<p>Home</p>');
