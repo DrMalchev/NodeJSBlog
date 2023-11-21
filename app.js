@@ -15,6 +15,7 @@ mongoose.connect(connectionString)
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'));
+app.use(express.urlencoded());
 app.use(morgan('dev'))
 
 
@@ -35,6 +36,17 @@ app.get('/blogs', (req, res) => {
             res.render('index', { title: "All Blogs", blogs: data })
         })
         .catch((err) => { console.log(err) })
+})
+
+
+//app.use(express.json());
+app.post('/blogs', (req, res) => {
+    const blog = new Blog(req.body)
+    blog.save()
+        .then((data) => {
+            res.redirect('./blogs')
+        })
+        .catch((err) => console.log(err))
 })
 
 
