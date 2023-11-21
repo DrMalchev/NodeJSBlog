@@ -5,7 +5,7 @@ const Blog = require('./models/blog')
 
 
 const app = express();
-const connectionString = 'mongodb+srv://testuser:SommerFest2@cluster0.jfd5ftu.mongodb.net/NodeTutorialDB?retryWrites=true&w=majority';
+const connectionString = 'mongodb+srv://<user>:<pass>@cluster0.jfd5ftu.mongodb.net/NodeTutorialDB?retryWrites=true&w=majority';
 mongoose.connect(connectionString)
     .then((result) => { app.listen(3000) })
     .catch((err) => { console.log(err) })
