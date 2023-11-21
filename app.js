@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const Blog = require('./models/blog')
 
 
 const app = express();
@@ -12,12 +13,39 @@ mongoose.connect(connectionString)
 // register view engine
 app.set('view engine', 'ejs')
 
-
-
+app.use(express.static('public'));
 app.use(morgan('dev'))
 
+// test blog creation and bd write
+app.get('/add-blog', (req, res) => {
+    const blog = new Blog({
+        title: "BlogTitle2",
+        snippet: "About Blog 2",
+        body: "Blog 2 body text text text text text etxt"
+    });
+    blog.save()
+        .then((result) => {
+            res.send(result)
+        })
+        .catch((err) => { console.log(err) });
+})
 
-app.use(express.static('public'));
+app.get('/all-blogs', (req, res) => {
+    Blog.find()
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => { console.log(err) })
+})
+
+app.get('/single-blog', (req, res) => {
+    Blog.findById('655c78cdf681886157a942b5')
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => { console.log(err) });
+})
+
 
 app.get('/', (req, res) => {
     //res.send('<p>Home</p>');
