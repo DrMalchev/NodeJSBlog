@@ -2,10 +2,11 @@ const express = require('express');
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const Blog = require('./models/blog')
+const config = require('./config');
 
-
+const { connectionString } = config;
 const app = express();
-const connectionString = 'mongodb+srv://<user>:<pass>@cluster0.jfd5ftu.mongodb.net/NodeTutorialDB?retryWrites=true&w=majority';
+
 mongoose.connect(connectionString)
     .then((result) => { app.listen(3000) })
     .catch((err) => { console.log(err) })
