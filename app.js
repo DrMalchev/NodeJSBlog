@@ -1,12 +1,18 @@
 const express = require('express');
 const morgan = require('morgan')
+const mongoose = require('mongoose')
+
 
 const app = express();
-
+const connectionString = 'mongodb+srv://testuser:SommerFest2@cluster0.jfd5ftu.mongodb.net/NodeTutorialDB?retryWrites=true&w=majority';
+mongoose.connect(connectionString)
+    .then((result) => { app.listen(3000) })
+    .catch((err) => { console.log(err) })
+    ;
 // register view engine
 app.set('view engine', 'ejs')
 
-app.listen(3000);
+
 
 app.use(morgan('dev'))
 
